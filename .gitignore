@@ -1,3 +1,6 @@
-node_modules/
+nbproject/private/
+build/
 *.class
 *.log
+*.jar
+*.db
