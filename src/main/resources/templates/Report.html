@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Report - Car Rental System</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+
+  .page {
+    width: 180mm;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --blue: #2196F3;
+    --blue-light: #E3F2FD;
+    --green: #4CAF50;
+    --green-light: #E8F5E9;
+    --orange: #FF9800;
+    --orange-light: #FFF3E0;
+    --pink: #E91E63;
+    --pink-light: #FCE4EC;
+    --text: #222;
+    --muted: #666;
+    --line: #CCCCCC;
+    --bg-light: #F0F0F0;
+  }
+  
+  body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: 0;
+    padding: 0;
+  }
+  
+  img { max-width: 100%; height: auto; }
+  
+  .header, .block, .summary-grid, .footer {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
+    background: var(--line);
+    color: var(--text);
+    border-radius: 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    height: 60px;
+    width: auto;
+    border-radius: 4px;
+  }
+  
+  .header-center {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .brand {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--text);
+  }
+  
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 5px;
+  }
+
+  /* Info Bar */
+  .info-bar {
+    background: white;
+    padding: 15px 25px;
+    border-left: 4px solid var(--blue);
+    margin-top: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--line);
+  }
+  
+  .info-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .info-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Summary Cards - Using exact FXML colors */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    border: 2px solid;
+  }
+  
+  .summary-card.blue {
+    background-color: var(--blue-light);
+    border-color: var(--blue);
+  }
+  
+  .summary-card.green {
+    background-color: var(--green-light);
+    border-color: var(--green);
+  }
+  
+  .summary-card.orange {
+    background-color: var(--orange-light);
+    border-color: var(--orange);
+  }
+  
+  .summary-card.pink {
+    background-color: var(--pink-light);
+    border-color: var(--pink);
+  }
+  
+  .summary-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .summary-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  /* Content Block */
+  .block {
+    background: white;
+    margin-top: 20px;
+    border-radius: 6px;
+    padding: 20px 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--line);
+  }
+  
+  .block-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: var(--text);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--line);
+  }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  .data-table thead th {
+    background: var(--bg-light);
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 2px solid var(--line);
+  }
+  
+  .data-table tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--text);
+  }
+  
+  .data-table tbody tr:hover {
+    background: var(--bg-light);
+  }
+  
+  .data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .font-bold { font-weight: 700; }
+
+  /* Status Badge */
+  .status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--green);
+    color: white;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* Totals */
+  .totals-section {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 6px;
+    margin-top: 20px;
+  }
+  
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--text);
+  }
+  
+  .total-row.highlight {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .total-row.grand-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green);
+    border-top: 2px solid var(--line);
+    padding-top: 15px;
+    margin-top: 10px;
+  }
+
+  /* Notes */
+  .notes-section {
+    background: #fafafa;
+    border: 2px solid var(--line);
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  
+  .notes-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  /* Footer */
+  .footer {
+    background: white;
+    padding: 20px 25px;
+    text-align: center;
+    border-top: 3px solid var(--green);
+    border-radius: 0 0 6px 6px;
+    margin-top: 25px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  .footer-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  
+  .footer-meta {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  @media print {
+    body { margin: 0; }
+    .page { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <!-- Header -->
+    <div class="header">
+      <img class="logo" src="C:\Users\LENOVO\OneDrive\Desktop\rentaCar\src\main\resources\templates\Side Bar Logo.png" alt="logo">
+      <div class="header-center">
+        <div class="brand">Car Rental System - Reports</div>
+        <div class="title">Business Intelligence Report</div>
+      </div>
+      <img class="logo" src="C:\Users\LENOVO\OneDrive\Desktop\rentaCar\src\main\resources\templates\Side Bar Logo.png" alt="logo">
+    </div>
+
+    <!-- Report Info -->
+    <div class="info-bar">
+      <div class="info-item">
+        <div class="info-label">Report Type</div>
+        <div class="info-value">{{reportType}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Period</div>
+        <div class="info-value">{{fromDate}} - {{toDate}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Generated</div>
+        <div class="info-value">{{generatedDate}}</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Report ID</div>
+        <div class="info-value">#{{reportId}}</div>
+      </div>
+    </div>
+
+
+
+    <!-- Report Data -->
+    <div class="block">
+      <div class="block-title">Detailed Report Data</div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Customer</th>
+            <th>Vehicle</th>
+            <th class="text-center">Status</th>
+            <th class="text-right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{date1}}</td>
+            <td>{{ref1}}</td>
+            <td>{{customer1}}</td>
+            <td>{{vehicle1}}</td>
+            <td class="text-center"><span class="status-badge">{{status1}}</span></td>
+            <td class="text-right font-bold">Rs. {{amount1}}</td>
+          </tr>
+          <tr>
+            <td>{{date2}}</td>
+            <td>{{ref2}}</td>
+            <td>{{customer2}}</td>
+            <td>{{vehicle2}}</td>
+            <td class="text-center"><span class="status-badge">{{status2}}</span></td>
+            <td class="text-right font-bold">Rs. {{amount2}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Totals -->
+      <div class="totals-section">
+        <div class="total-row">
+          <div>Subtotal:</div>
+          <div>Rs. {{subtotal}}</div>
+        </div>
+        <div class="total-row highlight">
+          <div>Tax ({{taxPercent}}%):</div>
+          <div>Rs. {{tax}}</div>
+        </div>
+        <div class="total-row grand-total">
+          <div>Grand Total:</div>
+          <div>Rs. {{grandTotal}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    {{#if notes}}
+    <div class="notes-section">
+      <div class="notes-title">Report Notes:</div>
+      {{notes}}
+    </div>
+    {{/if}}
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-text">Thank you for using Car Rental System</div>
+      <div class="footer-meta">
+        Report generated on {{generatedDateTime}}<br>
+        For inquiries, please contact us or visit our office.
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

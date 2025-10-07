@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0"
+    xmlns="http://javafx.com/javafx/24.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.mycompany.rentcar.CustomerController">
+
+    <!-- Main Container VBox for vertical layout -->
+    <VBox spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+
+        <!-- Header Section -->
+        <VBox maxHeight="150.0" minHeight="100.0" prefHeight="120.0" spacing="5.0" style="-fx-background-color: #CCCCCC;">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+
+            <!-- Top row with logos and title -->
+            <HBox alignment="CENTER" spacing="20.0">
+                <children>
+                    <ImageView fitHeight="50.0" fitWidth="80.0" preserveRatio="true" smooth="true">
+                        <image>
+                            <Image url="@Side%20Bar%20Logo.png"/>
+                        </image>
+                    </ImageView>
+
+                    <Label alignment="CENTER" text="Car Rental System - Customers" HBox.hgrow="ALWAYS">
+                        <font>
+                            <Font name="System Bold Italic" size="20.0"/>
+                        </font>
+                    </Label>
+
+                    <ImageView fitHeight="50.0" fitWidth="80.0" preserveRatio="true" smooth="true">
+                        <image>
+                            <Image url="@Side%20Bar%20Logo.png"/>
+                        </image>
+                    </ImageView>
+                </children>
+            </HBox>
+
+            <!-- Navigation Buttons Row -->
+            <HBox alignment="CENTER" spacing="8.0">
+                <children>
+                    <Button fx:id="availabilityBtn" prefHeight="33.0" prefWidth="174.0" text="Availability F1"/>
+                    <Button fx:id="customerBtn" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="Customer F2"/>
+                    <Button fx:id="rentalBtn" prefHeight="32.0" prefWidth="148.0" text="Rental F3"/>
+                    <Button fx:id="returnBtn" prefHeight="32.0" prefWidth="150.0" text="Return F4"/>
+                    <Button fx:id="vehiclesBtn" prefHeight="32.0" prefWidth="184.0" text="Vehicles F5"/>
+                </children>
+            </HBox>
+        </VBox>
+
+        <!-- Search and Filter Section -->
+        <HBox spacing="15.0">
+            <children>
+                <Label text="Search:">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="searchField" prefHeight="32.0" prefWidth="280.0" promptText="Name, License No, Phone, or Email..."/>
+                
+                <Label text="Blacklist Status:">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="blacklistFilter" prefHeight="32.0" prefWidth="140.0" promptText="All"/>
+                
+                <Button fx:id="searchBtn" prefHeight="32.0" prefWidth="120.0" text="Search (Enter)"/>
+                <Button fx:id="resetBtn" prefHeight="32.0" prefWidth="130.0" text="Reset (Ctrl+R)"/>
+            </children>
+        </HBox>
+
+        <!-- Customer Table Section -->
+        <TableView fx:id="customerTable" prefHeight="400.0" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="60.0" text="ID"/>
+                <TableColumn fx:id="colFullName" prefWidth="170.0" text="Full Name"/>
+                <TableColumn fx:id="colLicenseNo" prefWidth="120.0" text="License No"/>
+                <TableColumn fx:id="colPhone" prefWidth="130.0" text="Phone"/>
+                <TableColumn fx:id="colEmail" prefWidth="200.0" text="Email"/>
+                <TableColumn fx:id="colAddress" prefWidth="210.0" text="Address"/>
+                <TableColumn fx:id="colBlacklisted" prefWidth="100.0" text="Blacklisted"/>
+                <TableColumn fx:id="colNotes" prefWidth="169.0" text="Notes"/>
+            </columns>
+        </TableView>
+
+        <!-- Action Buttons Section -->
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <children>
+                <Button fx:id="addBtn" prefHeight="40.0" prefWidth="180.0" text="Add Customer (Ctrl+A)"/>
+                <Button fx:id="editBtn" prefHeight="40.0" prefWidth="180.0" text="Edit Customer (Ctrl+E)"/>
+                <Button fx:id="deleteBtn" prefHeight="40.0" prefWidth="180.0" text="Delete Customer (Del)"/>
+                <Button fx:id="refreshBtn" prefHeight="40.0" prefWidth="120.0" text="Refresh (F6)"/>
+                <Button fx:id="exitBtn" onAction="#handleExit" prefHeight="40.0" prefWidth="100.0" text="Exit (Esc)"/>
+            </children>
+        </HBox>
+    </VBox>
+
+</AnchorPane>

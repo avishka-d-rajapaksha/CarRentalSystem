@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane"
+            minHeight="600.0" minWidth="800.0"
+            prefHeight="800.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.rentcar.ReturnVehicleController">
+
+    <children>
+        <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <!-- Header Section -->
+            <VBox maxHeight="150.0" minHeight="100.0" prefHeight="120.0" spacing="5.0" style="-fx-background-color: #CCCCCC;">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+
+                <HBox alignment="CENTER" prefHeight="16.0" prefWidth="1139.0" spacing="20.0" VBox.vgrow="NEVER">
+                    <children>
+                        <ImageView fitHeight="50.0" fitWidth="80.0" preserveRatio="true" smooth="true">
+                            <image>
+                                <Image url="@Side%20Bar%20Logo.png"/>
+                            </image>
+                        </ImageView>
+
+                        <Label alignment="CENTER" text="Car Rental System - Return Vehicle" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="System Bold Italic" size="20.0"/>
+                            </font>
+                        </Label>
+
+                        <ImageView fitHeight="50.0" fitWidth="80.0" preserveRatio="true" smooth="true">
+                            <image>
+                                <Image url="@Side%20Bar%20Logo.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" prefHeight="83.0" prefWidth="1139.0" spacing="8.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Button fx:id="availabilityBtn" prefHeight="50.0" prefWidth="174.0" text="Availability F1"
+                                onAction="#handleAvailability"/>
+                        <Button fx:id="customerBtn" prefHeight="60.0" prefWidth="153.0" text="Customer F2"
+                                onAction="#handleCustomer"/>
+                        <Button fx:id="rentalBtn" prefHeight="64.0" prefWidth="148.0" text="Rental F3"
+                                onAction="#handleRental"/>
+                        <Button fx:id="returnBtn" prefHeight="68.0" prefWidth="149.0"
+                                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"
+                                text="Return F4" onAction="#handleReturn"/>
+                        <Button fx:id="vehiclesBtn" prefHeight="66.0" prefWidth="184.0" text="Vehicles F5"
+                                onAction="#handleVehicles"/>
+                    </children>
+                </HBox>
+            </VBox>
+
+            <!-- Search Reservation Section -->
+            <HBox prefHeight="50.0" spacing="15.0" VBox.vgrow="NEVER">
+                <children>
+                    <Label text="Search Reservation:">
+                        <font>
+                            <Font name="System Bold" size="14.0"/>
+                        </font>
+                    </Label>
+                    <TextField fx:id="searchField" focusTraversable="true" prefHeight="32.0" prefWidth="350.0"
+                               promptText="Enter Reservation ID, Customer Name, or Vehicle Reg No..."/>
+                    <Button fx:id="searchBtn" mnemonicParsing="true" prefHeight="32.0" prefWidth="130.0"
+                            text="_Search (Enter)" onAction="#handleSearch"/>
+                    <Button fx:id="resetBtn" mnemonicParsing="true" prefHeight="32.0" prefWidth="130.0"
+                            text="_Reset (Ctrl+R)" onAction="#handleReset"/>
+                </children>
+            </HBox>
+
+            <!-- Reservation & Customer Info Section -->
+            <VBox spacing="10.0" style="-fx-border-color: #CCCCCC; -fx-border-width: 2; -fx-padding: 15;" VBox.vgrow="NEVER">
+                <children>
+                    <Label text="Reservation &amp; Customer Information">
+                        <font>
+                            <Font name="System Bold" size="16.0"/>
+                        </font>
+                    </Label>
+                    <GridPane hgap="20.0" vgap="10.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="NEVER" minWidth="120.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                        </rowConstraints>
+
+                        <!-- Booking / Customer Fields -->
+                        <Label text="Reservation ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="reservationIdField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="Customer Name:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField fx:id="customerNameField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                        <Label text="NIC / License:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="customerLicenseField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Phone:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField fx:id="customerPhoneField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                        <Label text="Vehicle Reg No:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="vehicleRegNoField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label text="Brand / Model:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <TextField fx:id="vehicleModelField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+                        <Label text="Pickup Date:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="pickupDateField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="Due Date:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <TextField fx:id="dueDateField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="statusField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    </GridPane>
+                </children>
+            </VBox>
+
+            <!-- Return Details Section -->
+            <VBox spacing="10.0" style="-fx-border-color: #CCCCCC; -fx-border-width: 2; -fx-padding: 15;" VBox.vgrow="NEVER">
+                <children>
+                    <Label text="Return Details">
+                        <font>
+                            <Font name="System Bold" size="16.0"/>
+                        </font>
+                    </Label>
+
+                    <GridPane hgap="20.0" vgap="10.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="NEVER" minWidth="150.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="NEVER" minWidth="150.0"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                            <RowConstraints/>
+                        </rowConstraints>
+
+                        <Label text="Actual Return Date:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <DatePicker fx:id="actualReturnDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="Planned Days:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField fx:id="plannedDaysField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                        <Label text="Actual Days:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="actualDaysField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Late Days:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField fx:id="lateDaysField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                        <Label text="Late Fee:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="lateFeeField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label text="Total Cost:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <TextField fx:id="totalCostField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+                        <Label text="Paid Amount:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="paidAmountField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="Balance / Refund:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <TextField fx:id="balanceRefundField" editable="false" style="-fx-background-color: #F0F0F0;" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                    </GridPane>
+
+                    <Label text="Notes / Remarks:"/>
+                    <TextArea fx:id="notesArea" prefHeight="60.0" promptText="Add any notes or remarks about vehicle condition, damages, etc..." wrapText="true"/>
+                </children>
+            </VBox>
+
+            <!-- Action Buttons Section -->
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="60.0" spacing="20.0" VBox.vgrow="NEVER">
+                <children>
+                    <Button fx:id="confirmBtn" mnemonicParsing="true" prefHeight="40.0" prefWidth="200.0"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"
+                            text="_Confirm Return (Ctrl+S)" onAction="#handleConfirmReturn"/>
+                    <Button fx:id="printBtn" alignment="CENTER" mnemonicParsing="true" prefHeight="40.0" prefWidth="180.0"
+                            text="_Print Receipt (Ctrl+P)" onAction="#handlePrintReceipt"/>
+                    <Button fx:id="cancelBtn" mnemonicParsing="true" prefHeight="40.0" prefWidth="140.0"
+                            text="C_ancel (Esc)" onAction="#handleCancel"/>
+                </children>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

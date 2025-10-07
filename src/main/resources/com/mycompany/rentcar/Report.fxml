@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.rentcar.ReportController" prefHeight="800.0" prefWidth="1200.0">
+
+    <VBox spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- Header -->
+        <VBox spacing="5" style="-fx-background-color: #CCCCCC;" prefHeight="120">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <HBox alignment="CENTER" spacing="20.0">
+                <ImageView fitHeight="50.0" fitWidth="80.0" preserveRatio="true" smooth="true">
+                    <image>
+                        <Image url="@com/mycompany/rentcar/Side%20Bar%20Logo.png" />
+                    </image>
+                </ImageView>
+
+                <Label text="Car Rental System - Reports" HBox.hgrow="ALWAYS" alignment="CENTER">
+                    <font>
+                        <Font name="System Bold Italic" size="20.0"/>
+                    </font>
+                </Label>
+
+                <ImageView fitHeight="50.0" fitWidth="80.0" preserveRatio="true" smooth="true">
+                    <image>
+                        <Image url="@com/mycompany/rentcar/Side%20Bar%20Logo.png" />
+                    </image>
+                </ImageView>
+            </HBox>
+
+            <!-- Navigation Buttons -->
+            <HBox alignment="CENTER" spacing="8.0">
+                <Button fx:id="availabilityBtn" text="Availability F1" prefWidth="140"/>
+                <Button fx:id="customerBtn" text="Customer F2" prefWidth="140"/>
+                <Button fx:id="rentalBtn" text="Rental F3" prefWidth="140"/>
+                <Button fx:id="returnBtn" text="Return F4" prefWidth="140"/>
+                <Button fx:id="vehiclesBtn" text="Vehicles F5" prefWidth="140"/>
+            </HBox>
+        </VBox>
+
+        <!-- Filters -->
+        <VBox spacing="10" style="-fx-border-color: #CCCCCC; -fx-border-width: 2; -fx-padding: 15;">
+            <Label text="Report Parameters">
+                <font><Font name="System Bold" size="16"/></font>
+            </Label>
+
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="120"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints minWidth="120"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Report Type:*" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="reportTypeCombo" prefWidth="250" promptText="Select Report Type"
+                          GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="From Date:*" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <DatePicker fx:id="fromDatePicker" prefWidth="200" promptText="Start Date"
+                            GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                <Label text="Status Filter:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="statusFilterCombo" prefWidth="250" promptText="All Statuses"
+                          GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="To Date:*" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <DatePicker fx:id="toDatePicker" prefWidth="200" promptText="End Date"
+                            GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+            </GridPane>
+
+            <HBox spacing="15.0">
+                <Button fx:id="generateBtn" text="_Generate (F7)" mnemonicParsing="true" prefHeight="40" prefWidth="160"/>
+                <Button fx:id="clearBtn" text="_Clear (Ctrl+R)" mnemonicParsing="true" prefHeight="40" prefWidth="140"/>
+                <Label text="* Required fields" textFill="#666">
+                    <font><Font size="12"/></font>
+                </Label>
+            </HBox>
+        </VBox>
+
+        <!-- Summary -->
+        <HBox spacing="20.0" style="-fx-border-color: #CCCCCC; -fx-border-width: 2; -fx-padding: 15;">
+            <VBox alignment="CENTER" spacing="5.0"
+                  style="-fx-background-color: #E3F2FD; -fx-border-color: #2196F3; -fx-border-width: 2; -fx-padding: 10;">
+                <Label text="Total Records"/>
+                <Label fx:id="totalRecordsLabel" text="0" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="5.0"
+                  style="-fx-background-color: #E8F5E9; -fx-border-color: #4CAF50; -fx-border-width: 2; -fx-padding: 10;">
+                <Label text="Total Revenue"/>
+                <Label fx:id="totalRevenueLabel" text="Rs. 0.00" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="5.0"
+                  style="-fx-background-color: #FFF3E0; -fx-border-color: #FF9800; -fx-border-width: 2; -fx-padding: 10;">
+                <Label text="Active Bookings"/>
+                <Label fx:id="activeBookingsLabel" text="0" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="5.0"
+                  style="-fx-background-color: #FCE4EC; -fx-border-color: #E91E63; -fx-border-width: 2; -fx-padding: 10;">
+                <Label text="Total Customers"/>
+                <Label fx:id="totalCustomersLabel" text="0" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+            </VBox>
+        </HBox>
+
+        <!-- Table -->
+        <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+            <Label text="Report Results" style="-fx-font-size: 16.0; -fx-font-weight: bold;"/>
+            <TableView fx:id="reportTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="60" visible="false"/>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
+                    <TableColumn fx:id="colReference" text="Reference" prefWidth="120"/>
+                    <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150"/>
+                    <TableColumn fx:id="colVehicle" text="Vehicle" prefWidth="150"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+                    <TableColumn fx:id="colAmount" text="Amount" prefWidth="120"/>
+                    <TableColumn fx:id="colDetails" text="Details" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Notes -->
+        <VBox spacing="5.0" style="-fx-border-color: #CCCCCC; -fx-border-width: 2; -fx-padding: 10;">
+            <Label text="Report Notes:"/>
+            <TextArea fx:id="reportNotesArea" editable="false" prefHeight="80" wrapText="true"/>
+        </VBox>
+
+        <!-- Actions -->
+        <HBox spacing="15" alignment="CENTER_RIGHT">
+            <Button fx:id="exportPdfBtn" mnemonicParsing="true" prefWidth="140" text="Export PDF"/>
+            <Button fx:id="exportExcelBtn" mnemonicParsing="true" prefWidth="140" text="Export CSV"/>
+            <Button fx:id="printBtn" mnemonicParsing="true" prefWidth="140" text="Print"/>
+            <Button fx:id="refreshBtn" mnemonicParsing="true" prefWidth="140" text="Refresh"/>
+            <Button fx:id="exitBtn" mnemonicParsing="true" prefWidth="120" text="Exit"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

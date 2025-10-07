@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Return Receipt</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+
+  /* Constrain to printable area */
+  .page {
+    width: 180mm;              /* safely within A4 minus margins */
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  /* Make box sizes predictable */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --brand1: #4CAF50;  /* primary green - matches Return button */
+    --brand2: #45a049;  /* darker green accent */
+    --text: #222;
+    --muted: #666;
+    --line: #CCCCCC;    /* matches border color from FXML */
+    --bg-light: #F0F0F0; /* matches readonly field background */
+  }
+  body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin: 0;
+    padding: 0;
+  }
+  img { max-width: 100%; height: auto; }
+  table { width: 100%; table-layout: fixed; }
+  .kv td.value, .tbl td { word-break: break-word; }
+
+  /* Keep blocks together on page breaks */
+  .header, .block, .totals, .foot {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: var(--bg-light);
+    color: var(--text);
+    border-radius: 0;
+    border-bottom: 3px solid var(--brand1);
+  }
+  .brand {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--text);
+  }
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .logo {
+    height: 60px;
+    width: auto;
+    border-radius: 4px;
+    background: transparent;
+    padding: 4px;
+  }
+  .header-center {
+    flex: 1;
+    text-align: center;
+  }
+  .block {
+    margin-top: 16px;
+    border: 2px solid var(--line);
+    border-radius: 4px;
+    padding: 15px;
+    background: #fff;
+  }
+  .block-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .kv {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .kv td {
+    padding: 6px 8px;
+    vertical-align: top;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .kv td.key {
+    width: 160px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .kv td.value {
+    color: var(--muted);
+  }
+  .divider {
+    height: 2px;
+    background: var(--line);
+    margin: 14px 0;
+  }
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .tbl th, .tbl td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .tbl th {
+    background: var(--bg-light);
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 2px solid var(--line);
+  }
+  .right { text-align: right; }
+  .bold { font-weight: 700; }
+  .totals {
+    margin-top: 15px;
+    padding: 12px;
+    background: var(--bg-light);
+    border-radius: 4px;
+  }
+  .totals .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    font-size: 14px;
+  }
+  .totals .row.bold { 
+    font-size: 16px;
+    color: var(--brand1);
+    border-top: 2px solid var(--line);
+    padding-top: 10px;
+    margin-top: 5px;
+  }
+  .totals .row.highlight {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .foot {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fafafa;
+  }
+  .status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--brand1);
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .grid-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 160px 1fr;
+    gap: 10px 20px;
+    margin-bottom: 8px;
+  }
+  .grid-label { font-weight: 600; color: var(--text); }
+  .grid-value { color: var(--muted); }
+
+  @media print {
+    body { margin: 0; }
+    .page { transform-origin: top left; }
+    /* If still slightly too wide, uncomment next line to shrink a bit */
+    /* .page { transform: scale(0.98); } */
+  }
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="header">
+      <img class="logo" src="C:\Users\LENOVO\OneDrive\Desktop\rentaCar\src\main\resources\templates\Side Bar Logo.png" alt="logo">
+      <div class="header-center">
+        <div class="brand">Car Rental System</div>
+        <div class="title">Vehicle Return Receipt</div>
+      </div>
+      <img class="logo" src="C:\Users\LENOVO\OneDrive\Desktop\rentaCar\src\main\resources\templates\Side Bar Logo.png" alt="logo">
+    </div>
+
+    <div class="block">
+      <div class="block-title">Reservation & Customer Information</div>
+      <table class="kv">
+        <tr>
+          <td class="key">Reservation ID:</td>
+          <td class="value">#{{reservationId}}</td>
+          <td class="key">Customer Name:</td>
+          <td class="value">{{customerName}}</td>
+        </tr>
+        <tr>
+          <td class="key">NIC / License:</td>
+          <td class="value">{{license}}</td>
+          <td class="key">Phone:</td>
+          <td class="value">{{phone}}</td>
+        </tr>
+        <tr>
+          <td class="key">Vehicle Reg No:</td>
+          <td class="value">{{vehicleRegNo}}</td>
+          <td class="key">Brand / Model:</td>
+          <td class="value">{{vehicle}}</td>
+        </tr>
+        <tr>
+          <td class="key">Pickup Date:</td>
+          <td class="value">{{pickup}}</td>
+          <td class="key">Due Date:</td>
+          <td class="value">{{due}}</td>
+        </tr>
+        <tr>
+          <td class="key">Actual Return Date:</td>
+          <td class="value">{{actualReturn}}</td>
+          <td class="key">Status:</td>
+          <td class="value"><span class="status-badge">{{status}}</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="block">
+      <div class="block-title">Return Details & Charges</div>
+      
+      <table class="kv" style="margin-bottom: 15px;">
+        <tr>
+          <td class="key">Planned Days:</td>
+          <td class="value">{{plannedDays}} days</td>
+          <td class="key">Actual Days:</td>
+          <td class="value">{{actualDays}} days</td>
+        </tr>
+        <tr>
+          <td class="key">Late Days:</td>
+          <td class="value">{{lateDays}} days</td>
+          <td class="key">Daily Rate:</td>
+          <td class="value">LKR {{dailyRate}}</td>
+        </tr>
+      </table>
+
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th class="right">Amount (LKR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Planned Rental ({{plannedDays}} days × {{dailyRate}})</td>
+            <td class="right">{{plannedAmount}}</td>
+          </tr>
+          <tr>
+            <td>Late Fee ({{lateDays}} days)</td>
+            <td class="right">{{lateFee}}</td>
+          </tr>
+          <tr>
+            <td>Discount</td>
+            <td class="right">-{{discount}}</td>
+          </tr>
+          <tr>
+            <td>Tax ({{taxPercent}}%)</td>
+            <td class="right">{{tax}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="totals">
+        <div class="row"><div>Subtotal:</div><div>LKR {{subtotal}}</div></div>
+        <div class="row highlight"><div>Total Cost:</div><div>LKR {{total}}</div></div>
+        <div class="row"><div>Paid Amount:</div><div>LKR {{paid}}</div></div>
+        <div class="row bold">
+          <div>{{balanceLabel}}:</div>
+          <div>LKR {{balance}}</div>
+        </div>
+      </div>
+    </div>
+
+    {{#if notes}}
+    <div class="foot">
+      <strong>Notes / Remarks:</strong><br>
+      {{notes}}
+    </div>
+    {{/if}}
+
+    <div class="foot" style="margin-top: 20px; text-align: center;">
+      <strong>Thank you for choosing our Car Rental Service!</strong><br>
+      Invoice No: {{invoiceNo}} | Date: {{date}}<br>
+      For inquiries, please contact us or visit our office.
+    </div>
+  </div>
+
+</body>
+</html>
